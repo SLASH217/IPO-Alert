@@ -26,17 +26,15 @@ def ipo_details(html):
     if not table_body:
         raise IPOExtractionError("IPO body not found.")
 
-    # Extract table headings and data
     headings = extract_table_headings(ipo_div)
     data = extract_table_data(table_body)
 
-    # Find any open IPOs
-    open_ipo = get_open_ipo_row(data)
+    open_ipo = get_open_ipo_row(data, headings)
 
     return {
-        "headings": headings or [],
-        "data": data or [],
-        "open_ipo": open_ipo or None,
+        "headings": list(headings.keys()),
+        "data": data,
+        "open_ipo": open_ipo,
     }
 
 
@@ -62,20 +60,27 @@ def extract_table_data(table_body):
     # data is a 2D array [['1', 'GMLIL', 'Guardian Micro Life Insurance Limited', '1,845,000.00', '100.00', '2025-01-05', '2025-01-08 Open', 'Open', ''], ['2', 'RSM', 'Reliance Spinning Mills', '1,155,960.00', '820.80', 'Coming Soon', 'Coming Soon Coming Soon', 'Coming Soon', '']]
 
 
-def get_open_ipo_row(data):
-    """Check if at least one IPO is open and return a boolean."""
-    for tr in data:
-        if tr[-2].lower() == "open":
-            # print(tr)
-            return tr
-    return False
+def get_open_ipo_row(data, heading_map):
+    """Check for open IPOs using a dynamic column mapping."""
+    status_col = heading_map.get(
+        "Status", -1
+    )  # Replace "Status" with the actual header name
+    if status_col == -1:
+        raise IPOExtractionError("Status column not found.")
+    for row in data:
+        if row[status_col].lower() == "open":
+            return row
+    return None
 
 
 def extract_table_headings(ipo_div):
-    """Extract and clean table headings from a given div."""
-    return [
-        clean_text(th.text) for th in (safe_search(ipo_div, "find_all", "th") or [])
+    """Extract and map table headings to column indices."""
+    headings = [
+        clean_text(th.text) for th in safe_search(ipo_div, "find_all", "th") or []
     ]
+    if not headings:
+        raise IPOExtractionError("No table headings found.")
+    return {heading: index for index, heading in enumerate(headings)}
 
 
 def safe_search(obj, method, *args, **kwargs):
@@ -111,22 +116,18 @@ def test_ipo_extraction(html_path):
         print("Failed to read HTML data.")
         return
 
-    result = ipo_details(html_data)
-
-    # Handle errors
-    if "error" in result:
-        print(result["error"])
-        return
-
-    # Display results in the terminal for debugging
-    print("\nTable Headings:")
-    print(result["headings"])
-    print("\nTable Data:")
-    for row in result["data"]:
-        print(row)
-    if result["open_ipo"]:
-        print("\nOpen IPO Details:")
-        print(result["open_ipo"])
+    try:
+        result = ipo_details(html_data)
+        print("\nTable Headings:")
+        print(result["headings"])
+        print("\nTable Data:")
+        for row in result["data"]:
+            print(row)
+        if result["open_ipo"]:
+            print("\nOpen IPO Details:")
+            print(result["open_ipo"])
+    except IPOExtractionError as e:
+        print(f"Unexpected error: {e}")
 
 
 # html_data = read_fetched(HTML_PATH)

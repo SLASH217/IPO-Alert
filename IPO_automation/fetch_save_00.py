@@ -3,6 +3,7 @@ import requests
 
 # Function to fetch website content and save it locally
 def fetch_and_save(url, path):
+    """performs a get request to sharesansar.com & saves data in html file."""
     try:
         # Send GET request to the website
         response = requests.get(url, timeout=20)
@@ -10,7 +11,7 @@ def fetch_and_save(url, path):
         with open(path, "w", encoding="utf-8") as file:
             file.write(response.text)
         print("Data saved successfully!")
-        return response.text  # Return the HTML content
+        # return response.text  # Return the HTML content
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
         return None
