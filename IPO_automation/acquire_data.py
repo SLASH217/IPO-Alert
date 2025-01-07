@@ -61,25 +61,42 @@ def extract_table_data(table_body):
 
 
 def get_open_ipo_row(data, heading_map):
-    """Check for open IPOs using a dynamic column mapping."""
-    status_col = heading_map.get(
-        "Status", -1
-    )  # Replace "Status" with the actual header name
-    if status_col == -1:
+    """
+    Finds the first row where the 'Status' column has the value 'open'.
+    """
+    # Get the index of the 'Status' column
+    status_col = heading_map.get("Status")
+    if status_col is None:
         raise IPOExtractionError("Status column not found.")
+
+    # Loop through rows and check the 'Status' column
     for row in data:
-        if row[status_col].lower() == "open":
+        if row[status_col].strip().lower() == "open":
             return row
-    return None
+
+    return None  # No open IPO found
 
 
 def extract_table_headings(ipo_div):
-    """Extract and map table headings to column indices."""
+    """
+    Maps table headings (from <th> tags) to their column indices.
+    """
+    # Extract and clean headings
+    # headings = []
+    # for th in safe_search(ipo_div, "find_all", "th") or []: # safe_search(ipo_div, "find_all", th) ->ipo_div.find_all("th")
+    #     cleaned_text = clean_text(th.text)
+    #     headings.append(cleaned_text)
     headings = [
         clean_text(th.text) for th in safe_search(ipo_div, "find_all", "th") or []
     ]
     if not headings:
         raise IPOExtractionError("No table headings found.")
+
+    # Create a dictionary mapping headings to indices
+    # a = {}
+    # for index, heading in enumerate(headings):
+    #     a[heading] = index
+    # return a
     return {heading: index for index, heading in enumerate(headings)}
 
 

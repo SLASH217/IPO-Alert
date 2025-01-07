@@ -32,6 +32,6 @@ def read_fetched(file_name):
 
 
 if __name__ == "__main__":
-    HTML_PATH = "https://www.sharesansar.com"
+    HTML_URL = "https://www.sharesansar.com"
     HTML_PATH = "data/share.html"
-    fetch_and_save(HTML_PATH, HTML_PATH)
+    fetch_and_save(HTML_URL, HTML_PATH)
