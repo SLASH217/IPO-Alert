@@ -1,10 +1,10 @@
 import smtplib
 import os
 from dotenv import load_dotenv
-
-load_dotenv()
 from email.message import EmailMessage
 from acquire_data import read_fetched, IPOExtractionError, ipo_details
+
+load_dotenv()   
 
 
 def send_email(subject, body, to_email):

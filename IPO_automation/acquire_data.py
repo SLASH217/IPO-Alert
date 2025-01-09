@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 from fetch_save_00 import read_fetched
 
 
+
+
 class IPOExtractionError(Exception):
     """Custom exception for IPO extraction errors."""
 
