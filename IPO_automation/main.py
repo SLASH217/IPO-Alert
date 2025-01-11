@@ -199,7 +199,7 @@ def save_notified_ipo(identifier, log_file="notified_ipos.txt"):
 
 if __name__ == "__main__":
     HTML_URL = "https://www.sharesansar.com"
-    HTML_PATH = "C:/Users/Admin/Videos/Desktop/IPO-Alert/IPO_automation/data/share.html"
+    HTML_PATH = "./IPO_automation/data/share.html"
 
     RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")
     DIJU_MAIL = os.getenv("DIJU_MAIL")
