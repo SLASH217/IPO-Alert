@@ -201,7 +201,8 @@ if __name__ == "__main__":
     HTML_URL = "https://www.sharesansar.com"
     HTML_PATH = "C:/Users/Admin/Videos/Desktop/IPO-Alert/IPO_automation/data/share.html"
 
-    RECIPIENT_EMAIL = "prashannadahal217@gmail.com"
-
+    RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")
+    DIJU_MAIL = os.getenv("DIJU_MAIL")
     fetch_and_save(HTML_URL, HTML_PATH)
     notify_ipo(HTML_PATH, RECIPIENT_EMAIL)
+    notify_ipo(HTML_PATH, DIJU_MAIL)
