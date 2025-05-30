@@ -1,10 +1,11 @@
-import requests
-import re
-from bs4 import BeautifulSoup
-import smtplib
 import os
-from dotenv import load_dotenv
+import re
+import smtplib
 from email.message import EmailMessage
+
+import requests
+from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
@@ -151,15 +152,13 @@ def prepare_ipo_email(open_ipo):
     return subject, body
 
 
-def notify_ipo(html_path, recipient_email):
-    """Extract IPO details and send an email notification for open IPOs."""
+def notify_all_recipients(html_path, recipients):
     html_data = read_fetched(html_path)
     if not html_data:
         print("Failed to read HTML data.")
         return
 
     try:
-        notified_ipos = load_notified_ipos()
         result = ipo_details(html_data)
         open_ipo = result.get("open_ipo")
         if not open_ipo:
@@ -167,20 +166,25 @@ def notify_ipo(html_path, recipient_email):
             return
 
         ipo_identifier = open_ipo[2]
+        notified_ipos = load_notified_ipos()
+
         if ipo_identifier in notified_ipos:
             print(f"Already notified about IPO: {ipo_identifier}")
             return
 
+        # Send to all recipients
         subject, body = prepare_ipo_email(open_ipo)
         if subject and body:
-            send_email(subject, body, recipient_email)
+            for email in recipients:
+                send_email(subject, body, email)
+            print(f"Notifications sent for IPO: {ipo_identifier}")
+
+            # Save after all notifications are sent
             save_notified_ipo(ipo_identifier)
-            print(f"Notification sent for IPO: {ipo_identifier}")
         else:
             print("No valid data to send email.")
     except IPOExtractionError as e:
         print(f"Error during IPO extraction: {e}")
-
 
 def load_notified_ipos(log_file="notified_ipos.txt"):
     """Load the list of already notified IPOs from a file."""
@@ -199,10 +203,8 @@ def save_notified_ipo(identifier, log_file="notified_ipos.txt"):
 
 if __name__ == "__main__":
     HTML_URL = "https://www.sharesansar.com"
-    HTML_PATH = "./IPO_automation/data/share.html"
-
-    RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")
-    DIJU_MAIL = os.getenv("DIJU_MAIL")
+    HTML_PATH = "data/share.html"
+    emails = os.getenv("RECIPIENT_EMAIL_LIST", "")
+    emails = [email.strip() for email in emails.split(",") if email]
     fetch_and_save(HTML_URL, HTML_PATH)
-    notify_ipo(HTML_PATH, RECIPIENT_EMAIL)
-    notify_ipo(HTML_PATH, DIJU_MAIL)
+    notify_all_recipients(HTML_PATH, emails)
