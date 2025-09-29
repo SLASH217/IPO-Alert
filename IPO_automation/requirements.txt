@@ -1,6 +1,0 @@
-# requirements.txt
-
-# Core dependencies
-requests
-beautifulsoup4
-python-dotenv

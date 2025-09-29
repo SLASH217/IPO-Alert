@@ -1,0 +1,55 @@
+# GitHub Actions Cloud Automation (Free Alternative)
+
+name: IPO Alert - Cloud Automation
+on:
+  schedule:
+    # Run at 3:30 AM UTC (9:00 AM IST) and 10:30 AM UTC (4:00 PM IST)
+    - cron: '30 3 * * *'   # 9 AM IST
+    - cron: '30 10 * * *'  # 4 PM IST
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  ipo-alert:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Create data directory
+      run: mkdir -p data
+
+    - name: Run IPO Alert
+      env:
+        EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+        APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+        RECIPIENT_EMAIL_LIST: ${{ secrets.RECIPIENT_EMAIL_LIST }}
+      run: |
+        python -c "
+        import sys
+        sys.path.insert(0, 'src')
+        from src.main_app import IPOAlert
+
+        try:
+            app = IPOAlert()
+            success = app.run()
+            print('✅ IPO Alert completed successfully' if success else '❌ IPO Alert failed')
+        except Exception as e:
+            print(f'❌ Error: {e}')
+            sys.exit(1)
+        "
+
+    - name: Upload logs
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ipo-alert-logs
+        path: logs/
