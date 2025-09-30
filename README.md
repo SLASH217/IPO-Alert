@@ -1,5 +1,10 @@
 # IPO Alert Automation Project
 
+[![CI](https://github.com/SLASH217/IPO-Alert/actions/workflows/ci.yml/badge.svg)](https://github.com/SLASH217/IPO-Alert/actions/workflows/ci.yml)
+[![Cloud Automation](https://github.com/SLASH217/IPO-Alert/actions/workflows/cloud-automation.yml/badge.svg)](https://github.com/SLASH217/IPO-Alert/actions/workflows/cloud-automation.yml)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Welcome to the **IPO Alert Automation Project**! This project is designed to fetch the latest IPO details from [Sharesansar](https://www.sharesansar.com), process the data, and send notifications to specified email addresses. It's an efficient and automated solution to keep track of IPOs effortlessly.
 
 ## 🌟 Features
