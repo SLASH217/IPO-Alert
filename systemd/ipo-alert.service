@@ -1,0 +1,14 @@
+[Unit]
+Description=IPO Alert Notification Service
+After=network.target
+
+[Service]
+Type=oneshot
+User=slash
+WorkingDirectory=/home/slash/Coding/Projects/IPO-Alert
+ExecStart=/home/slash/Coding/Projects/IPO-Alert/ipo-alert.sh run
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
