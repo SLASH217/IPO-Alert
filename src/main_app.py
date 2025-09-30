@@ -1,13 +1,12 @@
 """Main IPO Alert application."""
 
 import sys
-from pathlib import Path
 from typing import Optional, Dict
 
 from .config import Config
 from .database import IPODatabase
 from .email_service import EmailService
-from .logger import setup_logger, get_logger
+from .logger import setup_logger
 from .scraper import IPOScraper
 
 

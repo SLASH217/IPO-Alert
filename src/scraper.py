@@ -1,6 +1,5 @@
 """Web scraping functionality for IPO data."""
 
-import os
 import re
 import time
 from functools import wraps

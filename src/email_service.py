@@ -4,7 +4,7 @@ import smtplib
 import requests
 from abc import ABC, abstractmethod
 from email.message import EmailMessage
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from .config import Config
 from .logger import get_logger
