@@ -6,7 +6,9 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 
-def setup_logger(name: str, log_file: str = "logs/ipo_alert.log", level: str = "INFO") -> logging.Logger:
+def setup_logger(
+    name: str, log_file: str = "logs/ipo_alert.log", level: str = "INFO"
+) -> logging.Logger:
     """
     Set up a logger with file and console handlers.
 
@@ -30,18 +32,16 @@ def setup_logger(name: str, log_file: str = "logs/ipo_alert.log", level: str = "
 
     # File handler with rotation
     file_handler = RotatingFileHandler(
-        log_file,
-        maxBytes=1024*1024,  # 1MB
-        backupCount=5
+        log_file, maxBytes=1024 * 1024, backupCount=5  # 1MB
     )
     file_formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s'
+        "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s"
     )
     file_handler.setFormatter(file_formatter)
 
     # Console handler
     console_handler = logging.StreamHandler()
-    console_formatter = logging.Formatter('%(levelname)s - %(message)s')
+    console_formatter = logging.Formatter("%(levelname)s - %(message)s")
     console_handler.setFormatter(console_formatter)
 
     logger.addHandler(file_handler)

@@ -25,7 +25,7 @@ class IPODatabase:
     def _initialize_database(self) -> None:
         """Initialize empty database file."""
         try:
-            with open(self.db_path, 'w', encoding='utf-8') as f:
+            with open(self.db_path, "w", encoding="utf-8") as f:
                 json.dump({}, f, indent=2)
             logger.info(f"Initialized new database at {self.db_path}")
         except Exception as e:
@@ -48,12 +48,12 @@ class IPODatabase:
             notification_record = NotificationRecord(
                 company_name=ipo_info.company_name,
                 notified_at=datetime.now(),
-                ipo_data=ipo_info.to_dict()
+                ipo_data=ipo_info.to_dict(),
             )
 
             data[ipo_info.company_name] = notification_record.to_dict()
 
-            with open(self.db_path, 'w', encoding='utf-8') as f:
+            with open(self.db_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
 
             logger.info(f"Saved notification record for {ipo_info.company_name}")
@@ -79,7 +79,9 @@ class IPODatabase:
 
             if is_notified:
                 record = data[company_name]
-                logger.info(f"IPO {company_name} was already notified at {record.get('notified_at')}")
+                logger.info(
+                    f"IPO {company_name} was already notified at {record.get('notified_at')}"
+                )
 
             return is_notified
 
@@ -98,7 +100,7 @@ class IPODatabase:
             if not self.db_path.exists():
                 return {}
 
-            with open(self.db_path, 'r', encoding='utf-8') as f:
+            with open(self.db_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             return data
@@ -147,7 +149,9 @@ class IPODatabase:
         """
         try:
             data = self.load_history()
-            cutoff_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            cutoff_date = datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
             cutoff_date = cutoff_date.replace(day=cutoff_date.day - days_to_keep)
 
             original_count = len(data)
@@ -156,7 +160,7 @@ class IPODatabase:
             filtered_data = {}
             for company, record_data in data.items():
                 try:
-                    notified_at = datetime.fromisoformat(record_data['notified_at'])
+                    notified_at = datetime.fromisoformat(record_data["notified_at"])
                     if notified_at >= cutoff_date:
                         filtered_data[company] = record_data
                 except Exception as e:
@@ -165,7 +169,7 @@ class IPODatabase:
                     filtered_data[company] = record_data
 
             # Save cleaned data
-            with open(self.db_path, 'w', encoding='utf-8') as f:
+            with open(self.db_path, "w", encoding="utf-8") as f:
                 json.dump(filtered_data, f, indent=2, ensure_ascii=False)
 
             removed_count = original_count - len(filtered_data)
@@ -192,7 +196,7 @@ class IPODatabase:
                     "total_notifications": 0,
                     "first_notification": None,
                     "last_notification": None,
-                    "database_size_kb": 0
+                    "database_size_kb": 0,
                 }
 
             dates = [record.notified_at for record in records]
@@ -202,7 +206,7 @@ class IPODatabase:
                 "total_notifications": len(records),
                 "first_notification": min(dates).isoformat(),
                 "last_notification": max(dates).isoformat(),
-                "database_size_kb": round(file_size, 2)
+                "database_size_kb": round(file_size, 2),
             }
 
         except Exception as e:

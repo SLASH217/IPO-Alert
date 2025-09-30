@@ -26,19 +26,25 @@ class Config:
     resend_from_email: str = None
 
     @classmethod
-    def from_env(cls) -> 'Config':
+    def from_env(cls) -> "Config":
         """Create configuration from environment variables."""
         email_address = os.getenv("EMAIL_ADDRESS")
         app_password = os.getenv("APP_PASSWORD")
 
         if not email_address or not app_password:
-            raise ValueError("EMAIL_ADDRESS and APP_PASSWORD must be set in environment variables")
+            raise ValueError(
+                "EMAIL_ADDRESS and APP_PASSWORD must be set in environment variables"
+            )
 
         emails_str = os.getenv("RECIPIENT_EMAIL_LIST", "")
-        recipient_emails = [email.strip() for email in emails_str.split(",") if email.strip()]
+        recipient_emails = [
+            email.strip() for email in emails_str.split(",") if email.strip()
+        ]
 
         if not recipient_emails:
-            raise ValueError("RECIPIENT_EMAIL_LIST must be set in environment variables")
+            raise ValueError(
+                "RECIPIENT_EMAIL_LIST must be set in environment variables"
+            )
 
         return cls(
             email_address=email_address,
@@ -49,7 +55,7 @@ class Config:
             notified_ipos_file=os.getenv("NOTIFIED_IPOS_FILE", cls.notified_ipos_file),
             log_level=os.getenv("LOG_LEVEL", cls.log_level),
             resend_api_key=os.getenv("RESEND_API_KEY"),
-            resend_from_email=os.getenv("RESEND_FROM_EMAIL")
+            resend_from_email=os.getenv("RESEND_FROM_EMAIL"),
         )
 
     def validate(self) -> None:

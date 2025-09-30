@@ -77,14 +77,20 @@ class IPOAlert:
 
             # Check if already notified (unless forced)
             if not force and self.database.is_already_notified(open_ipo.company_name):
-                self.logger.info(f"Already notified about {open_ipo.company_name}. Skipping.")
+                self.logger.info(
+                    f"Already notified about {open_ipo.company_name}. Skipping."
+                )
                 return True
 
             if dry_run:
-                self.logger.info(f"DRY RUN: Would send notification for {open_ipo.company_name}")
+                self.logger.info(
+                    f"DRY RUN: Would send notification for {open_ipo.company_name}"
+                )
                 subject, body = self.email_service.prepare_ipo_notification(open_ipo)
                 self.logger.info(f"Subject: {subject}")
-                self.logger.info(f"Recipients: {', '.join(self.config.recipient_emails)}")
+                self.logger.info(
+                    f"Recipients: {', '.join(self.config.recipient_emails)}"
+                )
                 return True
 
             # Send notifications
@@ -95,7 +101,9 @@ class IPOAlert:
             if successful_sends > 0:
                 # Save notification record
                 if self.database.save_ipo_notification(open_ipo):
-                    self.logger.info(f"Successfully processed IPO notification for {open_ipo.company_name}")
+                    self.logger.info(
+                        f"Successfully processed IPO notification for {open_ipo.company_name}"
+                    )
                     return True
                 else:
                     self.logger.warning("Failed to save notification record")
@@ -119,7 +127,7 @@ class IPOAlert:
             "config_valid": False,
             "email_connection": False,
             "source_accessible": False,
-            "database_accessible": False
+            "database_accessible": False,
         }
 
         try:
@@ -156,13 +164,10 @@ class IPOAlert:
             config_stats = {
                 "recipient_count": len(self.config.recipient_emails),
                 "source_url": self.config.source_url,
-                "data_path": self.config.data_path
+                "data_path": self.config.data_path,
             }
 
-            return {
-                "database": db_stats,
-                "configuration": config_stats
-            }
+            return {"database": db_stats, "configuration": config_stats}
 
         except Exception as e:
             self.logger.error(f"Error getting stats: {e}")

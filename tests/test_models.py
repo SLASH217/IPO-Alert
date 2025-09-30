@@ -16,7 +16,7 @@ class TestIPOInfo:
             price_per_unit="NPR 100",
             start_date="2025-01-15",
             end_date="2025-01-25",
-            status="open"
+            status="open",
         )
 
         assert ipo.company_name == "Test Company"
@@ -31,7 +31,7 @@ class TestIPOInfo:
                 price_per_unit="NPR 100",
                 start_date="2025-01-15",
                 end_date="2025-01-25",
-                status="open"
+                status="open",
             )
 
     def test_ipo_info_status_check(self):
@@ -42,7 +42,7 @@ class TestIPOInfo:
             price_per_unit="NPR 100",
             start_date="2025-01-15",
             end_date="2025-01-25",
-            status="open"
+            status="open",
         )
 
         ipo_closed = IPOInfo(
@@ -51,7 +51,7 @@ class TestIPOInfo:
             price_per_unit="NPR 100",
             start_date="2025-01-15",
             end_date="2025-01-25",
-            status="closed"
+            status="closed",
         )
 
         assert ipo_open.is_open is True
@@ -65,7 +65,7 @@ class TestIPOInfo:
             price_per_unit="NPR 100",
             start_date="2025-01-15",
             end_date="2025-01-25",
-            status="open"
+            status="open",
         )
 
         result = ipo.to_dict()
@@ -75,21 +75,29 @@ class TestIPOInfo:
             "price_per_unit": "NPR 100",
             "start_date": "2025-01-15",
             "end_date": "2025-01-25",
-            "status": "open"
+            "status": "open",
         }
 
         assert result == expected
 
     def test_ipo_info_from_row_data(self):
         """Test IPOInfo creation from row data."""
-        row_data = ["1", "open", "Test Company", "1,000,000", "NPR 100", "2025-01-15", "2025-01-25"]
+        row_data = [
+            "1",
+            "open",
+            "Test Company",
+            "1,000,000",
+            "NPR 100",
+            "2025-01-15",
+            "2025-01-25",
+        ]
         headings = {
             "Company Name": 2,
             "Units": 3,
             "Price": 4,
             "Open Date": 5,
             "Close Date": 6,
-            "Status": 1
+            "Status": 1,
         }
 
         ipo = IPOInfo.from_row_data(row_data, headings)
@@ -108,9 +116,7 @@ class TestNotificationRecord:
         ipo_data = {"company_name": "Test Company", "status": "open"}
 
         record = NotificationRecord(
-            company_name="Test Company",
-            notified_at=now,
-            ipo_data=ipo_data
+            company_name="Test Company", notified_at=now, ipo_data=ipo_data
         )
 
         assert record.company_name == "Test Company"
@@ -123,9 +129,7 @@ class TestNotificationRecord:
         ipo_data = {"company_name": "Test Company", "status": "open"}
 
         record = NotificationRecord(
-            company_name="Test Company",
-            notified_at=now,
-            ipo_data=ipo_data
+            company_name="Test Company", notified_at=now, ipo_data=ipo_data
         )
 
         result = record.to_dict()
@@ -140,11 +144,13 @@ class TestNotificationRecord:
         data = {
             "company_name": "Test Company",
             "notified_at": now.isoformat(),
-            "ipo_data": {"company_name": "Test Company", "status": "open"}
+            "ipo_data": {"company_name": "Test Company", "status": "open"},
         }
 
         record = NotificationRecord.from_dict(data)
 
         assert record.company_name == "Test Company"
-        assert record.notified_at == now.replace(microsecond=0)  # ISO format loses microseconds
+        assert record.notified_at == now.replace(
+            microsecond=0
+        )  # ISO format loses microseconds
         assert record.ipo_data == data["ipo_data"]

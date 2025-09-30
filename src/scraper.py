@@ -18,11 +18,13 @@ logger = get_logger(__name__)
 
 class IPOExtractionError(Exception):
     """Custom exception for IPO extraction errors."""
+
     pass
 
 
 def retry(max_attempts: int = 3, delay: float = 1.0):
     """Retry decorator for network operations."""
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -31,12 +33,18 @@ def retry(max_attempts: int = 3, delay: float = 1.0):
                     return func(*args, **kwargs)
                 except Exception as e:
                     if attempt == max_attempts - 1:
-                        logger.error(f"All {max_attempts} attempts failed for {func.__name__}: {e}")
+                        logger.error(
+                            f"All {max_attempts} attempts failed for {func.__name__}: {e}"
+                        )
                         raise e
-                    logger.warning(f"Attempt {attempt + 1} failed: {e}. Retrying in {delay}s...")
+                    logger.warning(
+                        f"Attempt {attempt + 1} failed: {e}. Retrying in {delay}s..."
+                    )
                     time.sleep(delay)
             return None
+
         return wrapper
+
     return decorator
 
 
@@ -46,9 +54,11 @@ class IPOScraper:
     def __init__(self, source_url: str = "https://www.sharesansar.com"):
         self.source_url = source_url
         self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        })
+        self.session.headers.update(
+            {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            }
+        )
 
     @retry(max_attempts=3, delay=2.0)
     def fetch_and_save(self, file_path: str) -> bool:
@@ -101,7 +111,9 @@ class IPOScraper:
         try:
             with open(file_path, "r", encoding="utf-8") as file:
                 content = file.read()
-            logger.debug(f"Successfully read {len(content)} characters from {file_path}")
+            logger.debug(
+                f"Successfully read {len(content)} characters from {file_path}"
+            )
             return content
         except FileNotFoundError:
             logger.error(f"HTML file not found: {file_path}")
@@ -142,7 +154,7 @@ class IPOScraper:
             return {
                 "headings": list(headings.keys()),
                 "data": data,
-                "open_ipo": open_ipo
+                "open_ipo": open_ipo,
             }
 
         except Exception as e:
@@ -185,7 +197,9 @@ class IPOScraper:
 
         return data
 
-    def _get_open_ipo(self, data: List[List[str]], headings: Dict[str, int]) -> Optional[IPOInfo]:
+    def _get_open_ipo(
+        self, data: List[List[str]], headings: Dict[str, int]
+    ) -> Optional[IPOInfo]:
         """Find and return the first open IPO."""
         status_col = headings.get("Status")
         if status_col is None:

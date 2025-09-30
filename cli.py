@@ -26,7 +26,7 @@ Examples:
   python cli.py health                # Check system health
   python cli.py stats                 # Show statistics
   python cli.py cleanup               # Clean up old records
-        """
+        """,
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -36,12 +36,10 @@ Examples:
     run_parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Run without sending emails or saving notifications"
+        help="Run without sending emails or saving notifications",
     )
     run_parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Force notification even if already sent"
+        "--force", action="store_true", help="Force notification even if already sent"
     )
 
     # Health check command
@@ -56,7 +54,7 @@ Examples:
         "--days",
         type=int,
         default=30,
-        help="Number of days to keep records (default: 30)"
+        help="Number of days to keep records (default: 30)",
     )
 
     return parser
@@ -92,7 +90,9 @@ def handle_health_command(args) -> int:
         all_healthy = True
         for check_name, status in checks.items():
             status_icon = "✅" if status else "❌"
-            print(f"{status_icon} {check_name.replace('_', ' ').title()}: {'OK' if status else 'FAILED'}")
+            print(
+                f"{status_icon} {check_name.replace('_', ' ').title()}: {'OK' if status else 'FAILED'}"
+            )
             if not status:
                 all_healthy = False
 
@@ -119,7 +119,7 @@ def handle_stats_command(args) -> int:
         db_stats = stats.get("database", {})
         print(f"📈 Total Notifications: {db_stats.get('total_notifications', 0)}")
 
-        if db_stats.get('first_notification'):
+        if db_stats.get("first_notification"):
             print(f"🗓️  First Notification: {db_stats['first_notification']}")
             print(f"🗓️  Last Notification: {db_stats['last_notification']}")
 
@@ -144,7 +144,9 @@ def handle_cleanup_command(args) -> int:
         success = app.cleanup(days_to_keep=args.days)
 
         if success:
-            print(f"🧹 Cleanup completed successfully (kept records from last {args.days} days)")
+            print(
+                f"🧹 Cleanup completed successfully (kept records from last {args.days} days)"
+            )
             return 0
         else:
             print("❌ Cleanup failed")
@@ -169,7 +171,7 @@ def main():
         "run": handle_run_command,
         "health": handle_health_command,
         "stats": handle_stats_command,
-        "cleanup": handle_cleanup_command
+        "cleanup": handle_cleanup_command,
     }
 
     handler = handlers.get(args.command)

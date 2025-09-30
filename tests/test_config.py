@@ -9,30 +9,40 @@ from src.config import Config
 class TestConfig:
     """Test cases for Config class."""
 
-    @patch.dict(os.environ, {
-        'EMAIL_ADDRESS': 'test@example.com',
-        'APP_PASSWORD': 'testpassword',
-        'RECIPIENT_EMAIL_LIST': 'recipient1@test.com,recipient2@test.com'
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "EMAIL_ADDRESS": "test@example.com",
+            "APP_PASSWORD": "testpassword",
+            "RECIPIENT_EMAIL_LIST": "recipient1@test.com,recipient2@test.com",
+        },
+        clear=True,
+    )
     def test_config_from_env_valid(self):
         """Test Config creation from valid environment variables."""
         config = Config.from_env()
 
-        assert config.email_address == 'test@example.com'
-        assert config.app_password == 'testpassword'
-        assert config.recipient_emails == ['recipient1@test.com', 'recipient2@test.com']
+        assert config.email_address == "test@example.com"
+        assert config.app_password == "testpassword"
+        assert config.recipient_emails == ["recipient1@test.com", "recipient2@test.com"]
 
     @patch.dict(os.environ, {}, clear=True)
     def test_config_from_env_missing_email(self):
         """Test Config creation with missing email address."""
-        with pytest.raises(ValueError, match="EMAIL_ADDRESS and APP_PASSWORD must be set"):
+        with pytest.raises(
+            ValueError, match="EMAIL_ADDRESS and APP_PASSWORD must be set"
+        ):
             Config.from_env()
 
-    @patch.dict(os.environ, {
-        'EMAIL_ADDRESS': 'test@example.com',
-        'APP_PASSWORD': 'testpassword',
-        'RECIPIENT_EMAIL_LIST': ''
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "EMAIL_ADDRESS": "test@example.com",
+            "APP_PASSWORD": "testpassword",
+            "RECIPIENT_EMAIL_LIST": "",
+        },
+        clear=True,
+    )
     def test_config_from_env_empty_recipients(self):
         """Test Config creation with empty recipient list."""
         with pytest.raises(ValueError, match="RECIPIENT_EMAIL_LIST must be set"):
@@ -43,7 +53,7 @@ class TestConfig:
         config = Config(
             email_address="invalid-email",
             app_password="password",
-            recipient_emails=["valid@email.com"]
+            recipient_emails=["valid@email.com"],
         )
 
         with pytest.raises(ValueError, match="Invalid email address"):
@@ -54,7 +64,7 @@ class TestConfig:
         config = Config(
             email_address="valid@email.com",
             app_password="password",
-            recipient_emails=["invalid-email"]
+            recipient_emails=["invalid-email"],
         )
 
         with pytest.raises(ValueError, match="Invalid recipient email"):
@@ -65,7 +75,7 @@ class TestConfig:
         config = Config(
             email_address="valid@email.com",
             app_password="",
-            recipient_emails=["valid@email.com"]
+            recipient_emails=["valid@email.com"],
         )
 
         with pytest.raises(ValueError, match="App password cannot be empty"):
@@ -76,7 +86,7 @@ class TestConfig:
         config = Config(
             email_address="valid@email.com",
             app_password="password",
-            recipient_emails=["recipient1@email.com", "recipient2@email.com"]
+            recipient_emails=["recipient1@email.com", "recipient2@email.com"],
         )
 
         # Should not raise any exception

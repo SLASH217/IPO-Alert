@@ -63,7 +63,9 @@ class GmailProvider(BaseEmailProvider):
             logger.error(f"Gmail: SMTP error when sending to {to_email}: {e}")
             return False
         except Exception as e:
-            logger.error(f"Gmail: Unexpected error when sending email to {to_email}: {e}")
+            logger.error(
+                f"Gmail: Unexpected error when sending email to {to_email}: {e}"
+            )
             return False
 
     def test_connection(self) -> bool:
@@ -94,17 +96,19 @@ class ResendProvider(BaseEmailProvider):
         try:
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
 
             data = {
                 "from": self.from_email,
                 "to": [to_email],
                 "subject": subject,
-                "text": body
+                "text": body,
             }
 
-            response = requests.post(self.api_url, json=data, headers=headers)
+            response = requests.post(
+                self.api_url, json=data, headers=headers, timeout=30
+            )
             response.raise_for_status()
 
             logger.info(f"Resend: Email sent successfully to {to_email}")
@@ -114,7 +118,9 @@ class ResendProvider(BaseEmailProvider):
             logger.error(f"Resend: API error when sending to {to_email}: {e}")
             return False
         except Exception as e:
-            logger.error(f"Resend: Unexpected error when sending email to {to_email}: {e}")
+            logger.error(
+                f"Resend: Unexpected error when sending email to {to_email}: {e}"
+            )
             return False
 
     def test_connection(self) -> bool:
@@ -122,17 +128,21 @@ class ResendProvider(BaseEmailProvider):
         try:
             headers = {
                 "Authorization": f"Bearer {self.api_key}",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
 
             # Test with a simple API call (this endpoint doesn't exist, but tests auth)
-            response = requests.get("https://api.resend.com/domains", headers=headers)
+            response = requests.get(
+                "https://api.resend.com/domains", headers=headers, timeout=30
+            )
 
             if response.status_code in [200, 401, 403]:  # Auth-related responses
                 logger.info("Resend: API connection test successful")
                 return True
             else:
-                logger.error(f"Resend: API test failed with status {response.status_code}")
+                logger.error(
+                    f"Resend: API test failed with status {response.status_code}"
+                )
                 return False
 
         except Exception as e:
@@ -150,8 +160,8 @@ class EmailService:
     def _create_provider(self) -> BaseEmailProvider:
         """Create the appropriate email provider based on configuration."""
         # Check if Resend is configured
-        resend_api_key = getattr(self.config, 'resend_api_key', None)
-        resend_from_email = getattr(self.config, 'resend_from_email', None)
+        resend_api_key = getattr(self.config, "resend_api_key", None)
+        resend_from_email = getattr(self.config, "resend_from_email", None)
 
         if resend_api_key and resend_from_email:
             logger.info("Using Resend email provider")
@@ -174,7 +184,9 @@ class EmailService:
         """
         return self.provider.send_email(subject, body, to_email)
 
-    def send_bulk_email(self, subject: str, body: str, recipients: List[str]) -> Dict[str, bool]:
+    def send_bulk_email(
+        self, subject: str, body: str, recipients: List[str]
+    ) -> Dict[str, bool]:
         """
         Send email to multiple recipients.
 
