@@ -150,7 +150,5 @@ class TestNotificationRecord:
         record = NotificationRecord.from_dict(data)
 
         assert record.company_name == "Test Company"
-        assert record.notified_at == now.replace(
-            microsecond=0
-        )  # ISO format loses microseconds
+        assert record.notified_at == now  # ISO format preserves microseconds
         assert record.ipo_data == data["ipo_data"]
