@@ -3,9 +3,8 @@
 name: IPO Alert - Cloud Automation
 on:
   schedule:
-    # Run at 3:30 AM UTC (9:00 AM IST) and 10:30 AM UTC (4:00 PM IST)
-    - cron: '30 3 * * *'   # 9 AM IST
-    - cron: '30 10 * * *'  # 4 PM IST
+    # Run at 6:30 AM UTC (12:00 PM IST) - Daily at noon
+    - cron: '30 6 * * *'   # 12 PM IST (noon)
   workflow_dispatch: # Allow manual runs
 
 jobs:
@@ -32,6 +31,8 @@ jobs:
         EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
         APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
         RECIPIENT_EMAIL_LIST: ${{ secrets.RECIPIENT_EMAIL_LIST }}
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        RESEND_FROM_EMAIL: ${{ secrets.RESEND_FROM_EMAIL }}
       run: |
         python -c "
         import sys
