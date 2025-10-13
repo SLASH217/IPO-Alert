@@ -37,9 +37,10 @@ coverage.xml
 logs/
 *.log
 
-# Data files
-data/
-*.html
+# Data files (keep notification history, ignore temp files)
+data/*.html
+data/share*.html
+# Keep data/ipo_history.json for notification tracking
 
 # IDE
 .vscode/

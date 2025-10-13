@@ -10,6 +10,8 @@ on:
 jobs:
   ipo-alert:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allow pushing changes back to repo
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -47,6 +49,15 @@ jobs:
             print(f'❌ Error: {e}')
             sys.exit(1)
         "
+
+    - name: Commit notification history
+      if: success()
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/ipo_history.json
+        git diff --staged --quiet || git commit -m "Update IPO notification history [skip ci]"
+        git push
 
     - name: Upload logs
       if: always()
