@@ -16,17 +16,5 @@
       "status": "migrated",
       "source": "legacy_migration"
     }
-  },
-  "Shreenagar Agritech Industries Limited": {
-    "company_name": "Shreenagar Agritech Industries Limited",
-    "notified_at": "2025-10-12T18:56:50.971512",
-    "ipo_data": {
-      "company_name": "Shreenagar Agritech Industries Limited",
-      "units_available": "2,510,493.00",
-      "price_per_unit": "100.00",
-      "start_date": "2025-10-12",
-      "end_date": "2025-10-15 Open",
-      "status": "Open"
-    }
   }
 }
