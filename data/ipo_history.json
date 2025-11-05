@@ -28,5 +28,17 @@
       "end_date": "2025-10-15 Open",
       "status": "Open"
     }
+  },
+  "SY Panel Nepal Limited": {
+    "company_name": "SY Panel Nepal Limited",
+    "notified_at": "2025-11-05T06:50:36.021303",
+    "ipo_data": {
+      "company_name": "SY Panel Nepal Limited",
+      "units_available": "4,076,156.00",
+      "price_per_unit": "100.00",
+      "start_date": "2025-11-05",
+      "end_date": "2025-11-09 Open",
+      "status": "Open"
+    }
   }
 }
