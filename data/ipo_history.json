@@ -40,5 +40,17 @@
       "end_date": "2025-11-09 Open",
       "status": "Open"
     }
+  },
+  "Reliance Spinning Mills Limited": {
+    "company_name": "Reliance Spinning Mills Limited",
+    "notified_at": "2025-12-22T06:56:12.565726",
+    "ipo_data": {
+      "company_name": "Reliance Spinning Mills Limited",
+      "units_available": "924,768.00",
+      "price_per_unit": "820.80",
+      "start_date": "2025-12-22",
+      "end_date": "2025-12-26 Open",
+      "status": "Open"
+    }
   }
 }
