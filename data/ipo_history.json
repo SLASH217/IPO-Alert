@@ -52,5 +52,17 @@
       "end_date": "2025-12-26 Open",
       "status": "Open"
     }
+  },
+  "Salapa Bikas Bank Limited": {
+    "company_name": "Salapa Bikas Bank Limited",
+    "notified_at": "2025-12-31T06:55:28.307806",
+    "ipo_data": {
+      "company_name": "Salapa Bikas Bank Limited",
+      "units_available": "1,439,179.00",
+      "price_per_unit": "100.00",
+      "start_date": "2025-12-31",
+      "end_date": "2026-01-04 Open",
+      "status": "Open"
+    }
   }
 }
