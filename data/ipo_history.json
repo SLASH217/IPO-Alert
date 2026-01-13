@@ -64,5 +64,17 @@
       "end_date": "2026-01-04 Open",
       "status": "Open"
     }
+  },
+  "Solu Hydropower Limited": {
+    "company_name": "Solu Hydropower Limited",
+    "notified_at": "2026-01-13T06:56:41.762624",
+    "ipo_data": {
+      "company_name": "Solu Hydropower Limited",
+      "units_available": "8,200,000.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-01-13",
+      "end_date": "2026-01-18 Open",
+      "status": "Open"
+    }
   }
 }
