@@ -100,5 +100,17 @@
       "end_date": "2026-02-04 Open",
       "status": "Open"
     }
+  },
+  "Hotel Forest Inn Limited": {
+    "company_name": "Hotel Forest Inn Limited",
+    "notified_at": "2026-02-05T07:31:28.909409",
+    "ipo_data": {
+      "company_name": "Hotel Forest Inn Limited",
+      "units_available": "3,320,000.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-02-05",
+      "end_date": "2026-02-09 Open",
+      "status": "Open"
+    }
   }
 }
