@@ -136,5 +136,17 @@
       "end_date": "2026-02-27 Open",
       "status": "Open"
     }
+  },
+  "Shikhar Power Development Limited": {
+    "company_name": "Shikhar Power Development Limited",
+    "notified_at": "2026-03-01T07:07:43.912375",
+    "ipo_data": {
+      "company_name": "Shikhar Power Development Limited",
+      "units_available": "1,842,600.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-03-01",
+      "end_date": "2026-03-10 Open",
+      "status": "Open"
+    }
   }
 }
