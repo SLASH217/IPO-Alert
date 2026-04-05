@@ -148,5 +148,17 @@
       "end_date": "2026-03-10 Open",
       "status": "Open"
     }
+  },
+  "Kalinchowk Hydropower Limited": {
+    "company_name": "Kalinchowk Hydropower Limited",
+    "notified_at": "2026-04-05T07:36:31.399842",
+    "ipo_data": {
+      "company_name": "Kalinchowk Hydropower Limited",
+      "units_available": "684,750.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-04-05",
+      "end_date": "2026-04-08 Open",
+      "status": "Open"
+    }
   }
 }
