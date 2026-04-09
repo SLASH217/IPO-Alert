@@ -160,5 +160,17 @@
       "end_date": "2026-04-08 Open",
       "status": "Open"
     }
+  },
+  "Appolo Hydropower Limited": {
+    "company_name": "Appolo Hydropower Limited",
+    "notified_at": "2026-04-09T08:00:07.228134",
+    "ipo_data": {
+      "company_name": "Appolo Hydropower Limited",
+      "units_available": "780,200.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-04-09",
+      "end_date": "2026-04-13 Open",
+      "status": "Open"
+    }
   }
 }
