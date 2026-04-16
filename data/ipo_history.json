@@ -172,5 +172,17 @@
       "end_date": "2026-04-13 Open",
       "status": "Open"
     }
+  },
+  "Sopan Pharmaceuticals Limited": {
+    "company_name": "Sopan Pharmaceuticals Limited",
+    "notified_at": "2026-04-16T08:11:44.175108",
+    "ipo_data": {
+      "company_name": "Sopan Pharmaceuticals Limited",
+      "units_available": "3,474,900.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-04-16",
+      "end_date": "2026-04-21 Open",
+      "status": "Open"
+    }
   }
 }
