@@ -184,5 +184,17 @@
       "end_date": "2026-04-21 Open",
       "status": "Open"
     }
+  },
+  "Yambaling Hydropower Limited": {
+    "company_name": "Yambaling Hydropower Limited",
+    "notified_at": "2026-04-29T08:36:42.297965",
+    "ipo_data": {
+      "company_name": "Yambaling Hydropower Limited",
+      "units_available": "1,743,000.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-04-29",
+      "end_date": "2026-05-05 Open",
+      "status": "Open"
+    }
   }
 }
