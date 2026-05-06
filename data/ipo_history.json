@@ -196,5 +196,17 @@
       "end_date": "2026-05-05 Open",
       "status": "Open"
     }
+  },
+  "Taksar Pikhuwa Khola Hydropower Limited": {
+    "company_name": "Taksar Pikhuwa Khola Hydropower Limited",
+    "notified_at": "2026-05-06T08:43:16.650476",
+    "ipo_data": {
+      "company_name": "Taksar Pikhuwa Khola Hydropower Limited",
+      "units_available": "2,515,455.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-05-06",
+      "end_date": "2026-05-11 Open",
+      "status": "Open"
+    }
   }
 }
