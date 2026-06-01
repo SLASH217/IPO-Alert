@@ -232,5 +232,17 @@
       "end_date": "2026-05-27 Open",
       "status": "Open"
     }
+  },
+  "Sanigad Hydro Limited": {
+    "company_name": "Sanigad Hydro Limited",
+    "notified_at": "2026-06-01T12:15:10.485433",
+    "ipo_data": {
+      "company_name": "Sanigad Hydro Limited",
+      "units_available": "4,674,000.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-04 Open",
+      "status": "Open"
+    }
   }
 }
