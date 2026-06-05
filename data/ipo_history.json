@@ -244,5 +244,17 @@
       "end_date": "2026-06-04 Open",
       "status": "Open"
     }
+  },
+  "Everest Colour Limited": {
+    "company_name": "Everest Colour Limited",
+    "notified_at": "2026-06-05T10:29:35.234557",
+    "ipo_data": {
+      "company_name": "Everest Colour Limited",
+      "units_available": "655,700.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-06-05",
+      "end_date": "2026-06-10 Open",
+      "status": "Open"
+    }
   }
 }
