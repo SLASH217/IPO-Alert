@@ -268,5 +268,17 @@
       "end_date": "2026-06-16 Open",
       "status": "Open"
     }
+  },
+  "Mount Everest Power Development Limited": {
+    "company_name": "Mount Everest Power Development Limited",
+    "notified_at": "2026-06-17T11:20:24.824952",
+    "ipo_data": {
+      "company_name": "Mount Everest Power Development Limited",
+      "units_available": "1,427,600.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-06-17",
+      "end_date": "2026-06-22 Open",
+      "status": "Open"
+    }
   }
 }
