@@ -358,6 +358,7 @@ IPO Tracker Team
 - Integrate a dashboard to view and manage IPO alerts.
 - Add SMS notification support.
 - Enhance error logging and monitoring.
+- Add direct integration with meroShare
 
 ---
 
