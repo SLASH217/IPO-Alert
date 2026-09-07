@@ -280,5 +280,17 @@
       "end_date": "2026-06-22 Open",
       "status": "Open"
     }
+  },
+  "Beni Hydropower Project Limited": {
+    "company_name": "Beni Hydropower Project Limited",
+    "notified_at": "2026-09-07T12:52:28.808901",
+    "ipo_data": {
+      "company_name": "Beni Hydropower Project Limited",
+      "units_available": "863,200.00",
+      "price_per_unit": "100.00",
+      "start_date": "2026-09-07",
+      "end_date": "2026-09-11 Open",
+      "status": "Open"
+    }
   }
 }
